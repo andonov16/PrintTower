@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Print Tower", "Print Tower\Print Tower.csproj", "{439613F4-1354-497F-8080-46034BD0C1A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{439613F4-1354-497F-8080-46034BD0C1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439613F4-1354-497F-8080-46034BD0C1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439613F4-1354-497F-8080-46034BD0C1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439613F4-1354-497F-8080-46034BD0C1A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {884E818F-663D-4ADB-A1DE-6CD0F4D9EFC3}
+	EndGlobalSection
+EndGlobal
