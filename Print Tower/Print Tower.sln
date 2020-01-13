@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Print Tower", "Print Tower\Print Tower.csproj", "{439613F4-1354-497F-8080-46034BD0C1A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Print Tower", "Print Tower\Print Tower.csproj", "{6D7B2C94-6B94-4675-9C1F-F9E19E30E8E6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PrintSetup", "PrintSetup\PrintSetup.vdproj", "{36AC944D-BBD0-4E57-AADC-597A26B1CC6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +13,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{439613F4-1354-497F-8080-46034BD0C1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{439613F4-1354-497F-8080-46034BD0C1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{439613F4-1354-497F-8080-46034BD0C1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{439613F4-1354-497F-8080-46034BD0C1A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D7B2C94-6B94-4675-9C1F-F9E19E30E8E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D7B2C94-6B94-4675-9C1F-F9E19E30E8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D7B2C94-6B94-4675-9C1F-F9E19E30E8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D7B2C94-6B94-4675-9C1F-F9E19E30E8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36AC944D-BBD0-4E57-AADC-597A26B1CC6A}.Debug|Any CPU.ActiveCfg = Debug
+		{36AC944D-BBD0-4E57-AADC-597A26B1CC6A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {884E818F-663D-4ADB-A1DE-6CD0F4D9EFC3}
+		SolutionGuid = {EA8FF051-0EE2-4BAD-A5AD-75846E1323BB}
 	EndGlobalSection
 EndGlobal

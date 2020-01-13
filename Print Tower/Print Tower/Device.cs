@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using SnmpSharpNet;
 using Newtonsoft.Json;
+using MySql.Data.MySqlClient;
 
 namespace Print_Tower
 {
@@ -22,29 +23,38 @@ namespace Print_Tower
         public string IP { get; private set; }
         [JsonIgnore]
         public bool Online { get; private set; }
-        public List<DeviceProp> DeviceProps { get; private set; }
+        public ObservableCollection<DeviceProp> DeviceProps { get; private set; }
 
         static Device()
         {
             Devices = new ObservableCollection<Device>();
-            LoadData();
+            Device.LoadData();
         }
         public Device(string deviceName, string ip)
         {
             DeviceName = deviceName;
             IP = ip;
-            DeviceProps = new List<DeviceProp>();
+            DeviceProps = new ObservableCollection<DeviceProp>();
             IsOnline();
+            if (Device.Devices == null)
+                Device.Devices = new ObservableCollection<Device>();         
             Devices.Add(this);
         }
 
         public async void IsOnline()
         {
-            var result = await new Ping().SendPingAsync(IP);
-            Online = result.Status == IPStatus.Success;
-            if (Online)
+            try
             {
-                lastOnline = DateTime.Now;
+                var result = await new Ping().SendPingAsync(IP);
+                Online = result.Status == IPStatus.Success;
+                if (Online)
+                {
+                    lastOnline = DateTime.Now;
+                }
+            }
+            catch (Exception)
+            {
+                //go on
             }
         }
         public void CheckOIDs()
@@ -52,42 +62,42 @@ namespace Print_Tower
             IsOnline();
             if (Online)
             {
-                try
+                OctetString community = new OctetString("public");
+                AgentParameters param = new AgentParameters(community);
+                IpAddress agent = new IpAddress(IP);
+                UdpTarget target = new UdpTarget((IPAddress)agent, 161, 2000, 1);
+                Pdu pdu = new Pdu(PduType.Get);
+                foreach (var oid in DeviceProps)
                 {
-                    OctetString community = new OctetString("public");
-                    AgentParameters param = new AgentParameters(community);
-                    IpAddress agent = new IpAddress(IP);
-                    UdpTarget target = new UdpTarget((IPAddress)agent, 161, 2000, 1);
-                    Pdu pdu = new Pdu(PduType.Get);
-                    foreach (var oid in DeviceProps)
+                    pdu.VbList.Add(oid.PropOID);
+                }
+                SnmpPacket result = target.Request(pdu, param);
+                if (result != null)
+                {
+                    if (result.Pdu.ErrorStatus != 0)
                     {
-                        pdu.VbList.Add(oid.PropOID);
-                    }
-                    SnmpPacket result = target.Request(pdu, param);
-                    if (result != null)
-                    {
-                        if (result.Pdu.ErrorStatus != 0)
-                        {
-                            throw new ArgumentException("Error in SNMP reply. Error {0} " +
-                                result.Pdu.ErrorStatus + "index" +
-                                result.Pdu.ErrorIndex);
-                        }
-                        else
-                        {
-                            for (int i = 0; i < DeviceProps.Count; i++)
-                                DeviceProps[i].PropValue = result.Pdu.VbList[i].Value.ToString();
-                        }
+                        throw new ArgumentException("Error in SNMP reply. Error {0} " +
+                            result.Pdu.ErrorStatus + "index" +
+                            result.Pdu.ErrorIndex);
                     }
                     else
                     {
-                        throw new Exception("No response received from SNMP agent.");
+                        for (int i = 0; i < DeviceProps.Count; i++)
+                            try
+                            {
+                                DeviceProps[i].PropValue = result.Pdu.VbList[i].Value.ToString();
+                            }
+                            catch (Exception)
+                            {
+                                continue;
+                            }
                     }
-                    target.Close();
                 }
-                catch (ArgumentException)
+                else
                 {
-                    //Invalid OID
+                    throw new Exception("No response received from SNMP agent.");
                 }
+                target.Close();
             }
         }
         public void AddDeviceProperty(string propName, string propOid)
@@ -100,7 +110,8 @@ namespace Print_Tower
         }
         public void AddDeviceProperties(IEnumerable<DeviceProp> devProps)
         {
-            DeviceProps.AddRange(devProps);
+            foreach (DeviceProp devProp in devProps)
+                DeviceProps.Add(devProp);
             IsOnline();
             if (Online)
                 CheckOIDs();
@@ -130,6 +141,21 @@ namespace Print_Tower
         public static void Delete(Device dev)
         {
             Devices.Remove(dev);
+            //DBConnect.Delete(dev.DeviceName);
+        }
+    }
+
+    public class DeviceProp
+    {
+        public string PropName { get; private set; }
+        public string PropOID { get; private set; }
+        public string PropValue { get; set; }
+
+        public DeviceProp(string propName, string propOID)
+        {
+            this.PropName = propName;
+            this.PropOID = propOID;
+            this.PropValue = "No information";
         }
     }
 }

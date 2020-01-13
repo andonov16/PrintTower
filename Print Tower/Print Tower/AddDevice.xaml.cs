@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Net;
+using System.Net.NetworkInformation;
 
 namespace Print_Tower
 {
@@ -40,21 +41,53 @@ namespace Print_Tower
         private void Add_Button_Click(object sender, RoutedEventArgs e)
         {
             IPAddress ia;
-            if(DeviceName_Block.Text.Length != 0 &&
-                !Device.Devices.Any(dev => dev.DeviceName == DeviceName_Block.Text))
+            if (DeviceName_Block.Text.Length != 0)
             {
-                if (IPAddress.TryParse(IP_Block.Text, out ia))
+                if (Device.Devices != null && Device.Devices.Count > 0)
                 {
-                    Device newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
-                    newDev.AddDeviceProperties(newDeviceProps);
-                    Device.SaveData();
-                    this.Close();
-                }
-                else
+                    if (!Device.Devices.Any(dev => dev.DeviceName == DeviceName_Block.Text))
+                    {
+                        if (IPAddress.TryParse(IP_Block.Text, out ia))
+                        {
+                            Device newDev = null;
+                            try
+                            {
+                                newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
+                                newDev.AddDeviceProperties(newDeviceProps);
+                                DBConnect.Insert(newDev.DeviceName);
+                                Device.SaveData();
+                                this.Close();
+                            }
+                            catch (NetworkInformationException)
+                            {
+                                Device.Devices.Remove(newDev);
+                                MessageBox.Show("Invalid IP Adress");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid IP Adress");
+                        }
+                    }else
+                    {
+                        MessageBox.Show("Invalid Name");
+                    }
+                } else
                 {
-                    MessageBox.Show("Invalid IP Adress");
+                    if (IPAddress.TryParse(IP_Block.Text, out ia))
+                    {
+                        Device newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
+                        newDev.AddDeviceProperties(newDeviceProps);
+                        Device.SaveData();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid IP Adress");
+                    }
                 }
-            }else
+            }
+            else
             {
                 MessageBox.Show("Invalid Name");
             }

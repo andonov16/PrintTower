@@ -5,114 +5,86 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Print_Tower"
         mc:Ignorable="d"
-        Title="Print Tower" Height="600" Width="500" Closed="Window_Closed">
+        Title="Print Tower" Height="450" Width="800" Background="Snow">
+
+    <Border Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <StackPanel Grid.Column="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Name="AddDevice_Button" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" FontWeight="Bold" Grid.Column="0" Height="55" Content="Добави" Click="AddDevice_Button_Click"/>
+                    <Button Name="DeleteDevice_Button" FontWeight="Bold" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" Grid.Column="1" Content="Изтрии" Click="DeleteDevice_Button_Click"/>
+                    <Button Name="Settings_Button" FontWeight="Bold" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" Grid.Column="3" Content="Настройки" Click="Settings_Button_Click"/>
+                </Grid>
 
 
-    <Window.Resources>
-        <Style x:Key="InformButton" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="FontSize" Value="11px"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
-            <Setter Property="Background" >
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
-                        <GradientStop Color="#FFFFD190" Offset="0.2"/>
-                        <GradientStop Color="Orange" Offset="0.85"/>
-                        <GradientStop Color="#FFFFD190" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" 
-        				BorderThickness="1"
-        				Padding="4,2" 
-        				BorderBrush="DarkGray" 
-        				CornerRadius="3" 
-        				Background="{TemplateBinding Background}">
-                            <Grid >
-                                <ContentPresenter HorizontalAlignment="Center" 
-        	                           VerticalAlignment="Center" Name="contentShadow" 
-        					Style="{StaticResource ShadowStyle}">
-                                    <ContentPresenter.RenderTransform>
-                                        <TranslateTransform X="1.0" Y="1.0" />
-                                    </ContentPresenter.RenderTransform>
-                                </ContentPresenter>
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                    VerticalAlignment="Center" Name="content"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
-                                <Setter Property="Foreground" Value="#FF4788c8" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" >
-                                    <Setter.Value>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
-                                            <GradientStop Color="#FFFFD190" Offset="0.35"/>
-                                            <GradientStop Color="Orange" Offset="0.95"/>
-                                            <GradientStop Color="#FFFFD190" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter TargetName="content" Property="RenderTransform" >
-                                    <Setter.Value>
-                                        <TranslateTransform Y="1.0" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsDefaulted" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
-                                <Setter Property="Foreground" Value="Gray" />
-                            </Trigger>
 
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    
-    <Border Padding="5">
-        <StackPanel>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <DataGrid Name="PrintersList" Grid.Row="1" Margin="0,10"
+            AutoGenerateColumns="False" CanUserDeleteRows="False"  SelectedCellsChanged="DevPropsGrid_SelectedCellsChanged" Height="333">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Online}" Value="false">
+                                    <Setter Property="Background" Value="IndianRed"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Online}" Value="true">
+                                    <Setter Property="Background" Value="LightGreen"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
 
-                <Button Name="AddDevice_Button" FontWeight="Bold" Grid.Column="0" Height="40" Content="Add Priter" Click="AddDevice_Button_Click"/>
-                <Button Name="DeleteDevice_Button" FontWeight="Bold" Grid.Column="1" Content="Delete Printer" Click="DeleteDevice_Button_Click"/>
-                <Button Name="Explore_Button" FontWeight="Bold" Grid.Column="2" Content="Explore" Click="Explore_Button_Click"></Button>
-                <Button Name="ScanLAN_Button" FontWeight="Bold"  Grid.Column="3" Content="Scan LAN"/>
-                <Button Name="Settings_Button" FontWeight="Bold" Grid.Column="4" Content="Settings"/>
-            </Grid>
-            <TextBlock Text="Printers list" FontWeight="Bold" FontSize="26"  Margin="0, 10"></TextBlock>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn FontSize="16" Header="Име" Width="*"  Binding="{Binding Path=DeviceName}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="16" Header="IP адрес" Width="*" Binding="{Binding Path=IP}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="На линия" Width="*" Binding="{Binding Path=Online}"></DataGridTextColumn>
+                    </DataGrid.Columns>
 
-            <DataGrid Name="PrintersList"
-            AutoGenerateColumns="False" CanUserDeleteRows="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="16" Header="Name" Width="*"  Binding="{Binding Path=DeviceName}"></DataGridTextColumn>
-                    <DataGridTextColumn FontSize="16" Header="IP" Width="*" Binding="{Binding Path=IP}"></DataGridTextColumn>
-                    <DataGridTextColumn FontSize="16" Header="Online" Width="*" Binding="{Binding Path=Online}"></DataGridTextColumn>
-                </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            
+            <Border Margin="0,0,10,0" BorderThickness="5">
+                <StackPanel Name="ExplorePanel"  >
+                    <TextBlock Name="DeviceName_Block" FontSize="26" Grid.Column="0"/>
+                    <TextBlock Text="Име на устройството" Margin="0,0,0,20"/>
+                    <TextBlock Name="DeviceIP_Block" FontSize="26"/>
+                    <TextBlock Text="IP адрес" Margin="0,0,0,20"/>
 
-            </DataGrid>
-        </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Name="AddProp" Margin="-10,0,10,0" FontWeight="Bold" Foreground="White" Background="#228B22" BorderBrush="White" Height="30" Content="Добави поле" Click="AddProp_Click" Grid.Column="1"></Button>
+                        <Button Name="DeleteProp" FontWeight="Bold" Foreground="White" Background="#228B22" BorderBrush="White"  Content="Изтрий поле" Height="30" Grid.Column="2" Click="DeleteProp_Click"></Button>
+                    </Grid>
+                    <DataGrid Name="DevPropsGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" Height="222">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Име на полето" Binding="{Binding Path=PropName}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="OID на полето" Width="*" Binding="{Binding Path=PropOID}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Стойност" Width="*" Binding="{Binding Path=PropValue}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Border>
 </Window>

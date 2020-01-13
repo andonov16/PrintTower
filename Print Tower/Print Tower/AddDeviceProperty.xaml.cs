@@ -21,6 +21,7 @@ namespace Print_Tower
     public partial class AddDeviceProperty : Window
     {
         ObservableCollection<DeviceProp> devsToAdd;
+
         public AddDeviceProperty(ObservableCollection<DeviceProp> list)
         {
             InitializeComponent();

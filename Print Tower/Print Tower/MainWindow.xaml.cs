@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Windows;
-using System.Windows.Navigation;
 using System.Windows.Controls;
-using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace Print_Tower
 {
@@ -18,22 +14,51 @@ namespace Print_Tower
     /// </summary>
     public partial class MainWindow : Window
     {
-        BackgroundWorker bw;
+        DispatcherTimer dt = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
-            Device.LoadData();
+            Device.LoadData();            
             PrintersList.ItemsSource = Device.Devices;
-            BWorker.StartWorking(RefreshInfo);
+            dt.Tick += RefreshInfo;
+            dt.Interval = new TimeSpan(0, 10, 0);
+            dt.Start();
         }
 
-        private void RefreshInfo()
+        private void RefreshInfo(object sender, EventArgs e)
         {
-            foreach (var dev in Device.Devices)
-                dev.CheckOIDs();
-            Device.SaveData();
-            Thread.Sleep(1000);
-            RefreshInfo();
+            try
+            {
+                if (Device.Devices != null && Device.Devices.Count > 0)
+                {
+                    foreach (var dev in Device.Devices)
+                    {
+                        dev.CheckOIDs();
+                        DBConnect.Update(dev.DeviceName, "Status", dev.Online.ToString());
+                        if (dev.DeviceProps.Count >= 3)
+                            for (int i = 0; i < 3; i++)
+                            {
+                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Name", dev.DeviceProps[i].PropName);
+                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Value", dev.DeviceProps[i].PropValue);
+                            }
+                        else
+                        {
+                            for (int i = 0; i < dev.DeviceProps.Count; i++)
+                            {
+                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Name", dev.DeviceProps[i].PropName);
+                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Value", dev.DeviceProps[i].PropValue);
+                            }
+                        }
+                        DBConnect.Update(dev.DeviceName, "LastCheck", DateTime.Now.ToString());
+                    }
+                    Device.SaveData();
+                }
+            }
+            catch (Exception)
+            {
+                //Ignore
+            }
         }
 
         private void DeleteDevice_Button_Click(object sender, RoutedEventArgs e)
@@ -46,17 +71,50 @@ namespace Print_Tower
             AddDevice dv = new AddDevice();
             dv.Show();
         }
-        private void Explore_Button_Click(object sender, RoutedEventArgs e)
+        private void DevPropsGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if((Device) PrintersList.SelectedItem != null)
+            Device exploredDev = (Device)PrintersList.SelectedItem;
+            if (exploredDev != null)
             {
-                ExploreWindow ew = new ExploreWindow((Device)PrintersList.SelectedItem);
-                ew.Show();
+                if (ExplorePanel.Visibility == Visibility.Hidden)
+                    ExplorePanel.Visibility = Visibility.Visible;
+                DeviceName_Block.Text = exploredDev.DeviceName;
+                DeviceIP_Block.Text = exploredDev.IP;
+                DevPropsGrid.ItemsSource = exploredDev.DeviceProps;
+            }
+            else
+            {
+                ExplorePanel.Visibility = Visibility.Hidden;
             }
         }
-        private void Window_Closed(object sender, EventArgs e)
-        {
 
+        private void AddProp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Device dev = (Device)PrintersList.SelectedItem;
+                AddDeviceProperty addPropWin = new AddDeviceProperty(dev.DeviceProps);
+                addPropWin.Show();
+            }
+            catch (Exception)
+            {
+                //ingnore the click
+            }
+        }
+        private void DeleteProp_Click(object sender, RoutedEventArgs e)
+        {
+            DeviceProp deletedProp = (DeviceProp)DevPropsGrid.SelectedItem;
+            if(deletedProp != null)
+            {
+                Device dev = (Device)PrintersList.SelectedItem;
+                dev.DeviceProps.Remove(deletedProp);
+            }
+        }
+        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+            dt.Stop();
+            SettingsWindow sw = new SettingsWindow(dt);
+            sw.Show();
         }
     }
 }

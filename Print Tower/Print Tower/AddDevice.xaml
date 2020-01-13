@@ -5,34 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Print_Tower"
         mc:Ignorable="d"
-        Title="AddDevice" Height="410" Width="400" ResizeMode="NoResize">
+        Title="Добави устройство" Height="450" Width="500" ResizeMode="NoResize">
+
+
     <Border Padding="10">
         <StackPanel>
-            <TextBlock Text="Device Name" FontSize="18" Padding="5"/>
+            <TextBlock Text="Име на устройството" FontSize="18" Padding="5"/>
             <TextBox Name="DeviceName_Block" Height="30" Background="LightGray"></TextBox>
-            <TextBlock Text="Device IP" FontSize="18" Padding="5"/>
+            <TextBlock Text="IP aдрес" FontSize="18" Padding="5"/>
             <TextBox Name="IP_Block" Height="30" Background="LightGray"></TextBox>
-            
-            <TextBlock Text="Device Properties" FontSize="18" Padding="5"/>
+
+            <TextBlock Text="Полета на устройството" FontSize="18" Padding="5"/>
             <DataGrid Name="DevicePropsGrid" AutoGenerateColumns="False" Height="160" CanUserDeleteRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Property Name" Width="*" Binding="{Binding Path= PropName}" ></DataGridTextColumn>
-                    <DataGridTextColumn Header="Property OID" Width="*" Binding="{Binding Path= PropOID}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Име" Width="*" Binding="{Binding Path= PropName}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Стойност" Width="*" Binding="{Binding Path= PropOID}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <Button Name="AddProperty_Button" Content="Add Property" Grid.Column="1" Margin="5,0" Height="30" Click="AddProperty_Button_Click"/>
-                <Button Name="Add_Button" Content="Add" Grid.Column="2" Margin="5,0" Click="Add_Button_Click"/>
-                <Button Name="Cancel_Button" Content="Cancel" Grid.Column="3" Margin="5,0,0,0" Click="Cancel_Button_Click"/>
-            </Grid>
+            <Border Padding="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="AddProperty_Button" FontWeight="Bold" Foreground="White" Background="#228B22" BorderBrush="White" Content="Добави поле" Grid.Column="1" Margin="5,0" Height="40" Click="AddProperty_Button_Click"/>
+                    <Button Name="Add_Button" FontWeight="Bold" Foreground="White" Background="#228B22" BorderBrush="White" Content="Добави устр." Grid.Column="2" Margin="5,0" Click="Add_Button_Click"/>
+                    <Button Name="Cancel_Button" FontWeight="Bold" Foreground="White" Background="#228B22" BorderBrush="White" Content="Отказ" Grid.Column="3" Margin="5,0,0,0" Click="Cancel_Button_Click"/>
+                </Grid>
+            </Border>
         </StackPanel>
     </Border>
 </Window>

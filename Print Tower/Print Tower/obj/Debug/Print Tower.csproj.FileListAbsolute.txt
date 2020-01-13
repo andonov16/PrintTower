@@ -1,15 +1,19 @@
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.csprojAssemblyReference.cache
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDevice.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\MainWindow.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\App.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower_MarkupCompile.cache
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower_MarkupCompile.lref
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDeviceProperty.g.cs
 D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Print Tower.exe.config
 D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Print Tower.exe
 D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Print Tower.pdb
 D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Newtonsoft.Json.dll
 D:\Projects\C#\Print Tower\Print Tower\bin\Debug\SnmpSharpNet.dll
 D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Newtonsoft.Json.xml
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.csprojAssemblyReference.cache
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\MainWindow.g.cs
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\App.g.cs
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower_MarkupCompile.cache
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower_MarkupCompile.lref
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDevice.baml
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\MainWindow.baml
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDeviceProperty.baml
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.g.resources
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print_Tower.Properties.Resources.resources
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.csproj.GenerateResource.cache
@@ -17,9 +21,12 @@ D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.csproj.CoreCompileI
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.csproj.CopyComplete
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.exe
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.pdb
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDevice.g.cs
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDevice.baml
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDeviceProperty.g.cs
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDeviceProperty.baml
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\ExploreWindow.g.cs
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\ExploreWindow.baml
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\SettingsWindow.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\SettingsWindow.baml
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\BouncyCastle.Crypto.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Google.Protobuf.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\MySql.Data.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Renci.SshNet.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Google.Protobuf.xml
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\MySql.Data.xml
+D:\Projects\C#\Print Tower\Print Tower\bin\Debug\Renci.SshNet.xml
