@@ -22,8 +22,9 @@ namespace Print_Tower
         {
             server = "5.53.211.84";
             database = "Printtower";
-            uid = "root";
-            password = "dojcho";
+            uid = "miro";
+            password = "miro";
+            TableName = "Devstore";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -49,11 +50,18 @@ namespace Print_Tower
             return true;
         }
 
-        public static void Insert(string devName)
+        public static void Insert(string devName, string devIP, bool devStatus,
+                                  string Prop1Name, string Prop1Val, string Prop2Name, string Prop2Val,
+                                  string Prop3Name, string Prop3Val, DateTime LastCheck)
         {
-            TableName = "Devstore";
-            string query = @"INSERT INTO " + TableName + " (DeviceName) VALUES('" + devName + "')";
-
+            string query = @"INSERT INTO " + TableName + " " +
+                "(DeviceName,IPAddress,Status,Prop1Name,Prop1Value,Prop2Name,Prop2Value,Prop3Name,Prop3Value,LastCheck)" +
+                " VALUES(" + '"' + devName + '"' + "," + '"' + devIP + '"' + "," +
+                '"' + devStatus + '"' + "," + '"' + Prop1Name + '"' + "," +
+                '"' + Prop1Val + '"' + "," + '"' + Prop2Name + '"' + "," +
+                '"' + Prop2Val + '"' + "," + '"' + Prop3Name + '"' + "," +
+                '"' + Prop3Val + '"' + "," + '"' + LastCheck + '"' + ")";
+            Console.WriteLine(query);
             if (DBConnect.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -68,21 +76,6 @@ namespace Print_Tower
             if (DBConnect.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                DBConnect.CloseConnection();
-            }
-        }
-        public static void Update(string devName, string columnName, string columnVal)
-        {
-            //"UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'"
-            string query = "UPDATE " + TableName + " SET " + columnName + "=" + columnVal + " WHERE DevName='" + devName + "'";
-
-            //Open connection
-            if (DBConnect.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandText = query;
-                cmd.Connection = connection;
                 cmd.ExecuteNonQuery();
                 DBConnect.CloseConnection();
             }

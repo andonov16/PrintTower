@@ -35,22 +35,29 @@ namespace Print_Tower
                     foreach (var dev in Device.Devices)
                     {
                         dev.CheckOIDs();
-                        DBConnect.Update(dev.DeviceName, "Status", dev.Online.ToString());
-                        if (dev.DeviceProps.Count >= 3)
-                            for (int i = 0; i < 3; i++)
-                            {
-                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Name", dev.DeviceProps[i].PropName);
-                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Value", dev.DeviceProps[i].PropValue);
-                            }
-                        else
+                        if(dev.DeviceProps.Count>=3)
                         {
-                            for (int i = 0; i < dev.DeviceProps.Count; i++)
-                            {
-                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Name", dev.DeviceProps[i].PropName);
-                                DBConnect.Update(dev.DeviceName, "Prop" + i + "Value", dev.DeviceProps[i].PropValue);
-                            }
+                            DBConnect.Insert(dev.DeviceName, dev.IP, dev.Online,
+                            dev.DeviceProps[0].PropName, dev.DeviceProps[0].PropValue,
+                            dev.DeviceProps[1].PropName, dev.DeviceProps[1].PropValue,
+                            dev.DeviceProps[2].PropName, dev.DeviceProps[2].PropValue,
+                            DateTime.Now);
+                            return;
                         }
-                        DBConnect.Update(dev.DeviceName, "LastCheck", DateTime.Now.ToString());
+                        switch (dev.DeviceProps.Count)
+                        {
+                            case 1:
+                                DBConnect.Insert(dev.DeviceName, dev.IP, dev.Online,
+                                dev.DeviceProps[0].PropName, dev.DeviceProps[0].PropValue,
+                                null, null, null, null,
+                                DateTime.Now); break;
+                            case 2:
+                                DBConnect.Insert(dev.DeviceName, dev.IP, dev.Online,
+                                dev.DeviceProps[0].PropName, dev.DeviceProps[0].PropValue,
+                                dev.DeviceProps[1].PropName, dev.DeviceProps[1].PropValue,
+                                dev.DeviceProps[2].PropName, dev.DeviceProps[2].PropValue,
+                                DateTime.Now); break;
+                        }
                     }
                     Device.SaveData();
                 }

@@ -54,7 +54,6 @@ namespace Print_Tower
                             {
                                 newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
                                 newDev.AddDeviceProperties(newDeviceProps);
-                                DBConnect.Insert(newDev.DeviceName);
                                 Device.SaveData();
                                 this.Close();
                             }
