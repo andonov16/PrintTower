@@ -61,7 +61,6 @@ namespace Print_Tower
                 '"' + Prop1Val + '"' + "," + '"' + Prop2Name + '"' + "," +
                 '"' + Prop2Val + '"' + "," + '"' + Prop3Name + '"' + "," +
                 '"' + Prop3Val + '"' + "," + '"' + LastCheck + '"' + ")";
-            Console.WriteLine(query);
             if (DBConnect.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);

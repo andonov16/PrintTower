@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-H:\Print Tower\Print Tower\obj\Debug\
+D:\Projects\C#\Print Tower\Print Tower\obj\Debug\
 Print_Tower
 none
 false
 DEBUG;TRACE
-H:\Print Tower\Print Tower\App.xaml
+D:\Projects\C#\Print Tower\Print Tower\App.xaml
 41823954055
 
 10-1442460964
-271318494892
+272036528726
 AddDevice.xaml;AddDeviceProperty.xaml;MainWindow.xaml;SettingsWindow.xaml;
 
 False

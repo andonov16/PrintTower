@@ -29,7 +29,7 @@
                     </Grid.RowDefinitions>
 
                     <Button Name="AddDevice_Button" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" FontWeight="Bold" Grid.Column="0" Height="55" Content="Добави" Click="AddDevice_Button_Click"/>
-                    <Button Name="DeleteDevice_Button" FontWeight="Bold" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" Grid.Column="1" Content="Изтрии" Click="DeleteDevice_Button_Click"/>
+                    <Button Name="DeleteDevice_Button" FontWeight="Bold" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" Grid.Column="1" Content="Изтрий" Click="DeleteDevice_Button_Click"/>
                     <Button Name="Settings_Button" FontWeight="Bold" Foreground="White" FontSize="18" Background="#228B22" BorderBrush="White" Grid.Column="3" Content="Настройки" Click="Settings_Button_Click"/>
                 </Grid>
 

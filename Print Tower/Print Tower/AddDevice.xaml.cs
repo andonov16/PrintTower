@@ -40,6 +40,7 @@ namespace Print_Tower
         }
         private void Add_Button_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow.dt.Stop();
             IPAddress ia;
             if (DeviceName_Block.Text.Length != 0)
             {
@@ -49,11 +50,13 @@ namespace Print_Tower
                     {
                         if (IPAddress.TryParse(IP_Block.Text, out ia))
                         {
+
                             Device newDev = null;
                             try
                             {
                                 newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
                                 newDev.AddDeviceProperties(newDeviceProps);
+                                newDev.CheckOIDs();
                                 Device.SaveData();
                                 this.Close();
                             }
@@ -62,6 +65,7 @@ namespace Print_Tower
                                 Device.Devices.Remove(newDev);
                                 MessageBox.Show("Invalid IP Adress");
                             }
+
                         }
                         else
                         {
@@ -90,6 +94,7 @@ namespace Print_Tower
             {
                 MessageBox.Show("Invalid Name");
             }
+            MainWindow.dt.Start();
         }
         private void AddProperty_Button_Click(object sender, RoutedEventArgs e)
         {

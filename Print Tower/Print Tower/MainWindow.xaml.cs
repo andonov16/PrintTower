@@ -14,15 +14,16 @@ namespace Print_Tower
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer dt = new DispatcherTimer();
+        public static DispatcherTimer dt { get; set; }
 
         public MainWindow()
         {
+            dt = new DispatcherTimer();
             InitializeComponent();
             Device.LoadData();            
             PrintersList.ItemsSource = Device.Devices;
             dt.Tick += RefreshInfo;
-            dt.Interval = new TimeSpan(0, 10, 0);
+            dt.Interval = new TimeSpan(0, 0, 10);
             dt.Start();
         }
 
@@ -35,14 +36,13 @@ namespace Print_Tower
                     foreach (var dev in Device.Devices)
                     {
                         dev.CheckOIDs();
-                        if(dev.DeviceProps.Count>=3)
+                        if (dev.DeviceProps.Count >= 3)
                         {
                             DBConnect.Insert(dev.DeviceName, dev.IP, dev.Online,
                             dev.DeviceProps[0].PropName, dev.DeviceProps[0].PropValue,
                             dev.DeviceProps[1].PropName, dev.DeviceProps[1].PropValue,
                             dev.DeviceProps[2].PropName, dev.DeviceProps[2].PropValue,
                             DateTime.Now);
-                            return;
                         }
                         switch (dev.DeviceProps.Count)
                         {
@@ -55,7 +55,7 @@ namespace Print_Tower
                                 DBConnect.Insert(dev.DeviceName, dev.IP, dev.Online,
                                 dev.DeviceProps[0].PropName, dev.DeviceProps[0].PropValue,
                                 dev.DeviceProps[1].PropName, dev.DeviceProps[1].PropValue,
-                                dev.DeviceProps[2].PropName, dev.DeviceProps[2].PropValue,
+                                null, null,
                                 DateTime.Now); break;
                         }
                     }
@@ -68,6 +68,8 @@ namespace Print_Tower
             }
         }
 
+
+        //----------------------------MainWindow Events---------------------------------------------------
         private void DeleteDevice_Button_Click(object sender, RoutedEventArgs e)
         {
             Device.Delete((Device)PrintersList.SelectedItem);
@@ -94,7 +96,6 @@ namespace Print_Tower
                 ExplorePanel.Visibility = Visibility.Hidden;
             }
         }
-
         private void AddProp_Click(object sender, RoutedEventArgs e)
         {
             try
