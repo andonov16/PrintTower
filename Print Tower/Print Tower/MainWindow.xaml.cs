@@ -14,7 +14,7 @@ namespace Print_Tower
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static DispatcherTimer dt { get; set; }
+        public static DispatcherTimer dt;
 
         public MainWindow()
         {
@@ -23,7 +23,7 @@ namespace Print_Tower
             Device.LoadData();            
             PrintersList.ItemsSource = Device.Devices;
             dt.Tick += RefreshInfo;
-            dt.Interval = new TimeSpan(0, 0, 10);
+            dt.Interval = new TimeSpan(1, 0, 0);
             dt.Start();
         }
 
@@ -121,7 +121,7 @@ namespace Print_Tower
         private void Settings_Button_Click(object sender, RoutedEventArgs e)
         {
             dt.Stop();
-            SettingsWindow sw = new SettingsWindow(dt);
+            SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
     }

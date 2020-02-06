@@ -1,0 +1,31 @@
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Print Tower.exe.config
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Print Tower.exe
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Print Tower.pdb
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\BouncyCastle.Crypto.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Google.Protobuf.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\MySql.Data.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Newtonsoft.Json.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Renci.SshNet.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\SnmpSharpNet.dll
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Google.Protobuf.xml
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\MySql.Data.xml
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Newtonsoft.Json.xml
+D:\Projects\C#\Print Tower\Print Tower\bin\Release\Renci.SshNet.xml
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\AddDevice.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\AddDeviceProperty.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\MainWindow.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\SettingsWindow.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\App.g.cs
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower_MarkupCompile.cache
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower_MarkupCompile.lref
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\AddDevice.baml
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\AddDeviceProperty.baml
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\MainWindow.baml
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\SettingsWindow.baml
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower.g.resources
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print_Tower.Properties.Resources.resources
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower.csproj.GenerateResource.cache
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower.csproj.CoreCompileInputs.cache
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower.csproj.CopyComplete
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower.exe
+D:\Projects\C#\Print Tower\Print Tower\obj\Release\Print Tower.pdb

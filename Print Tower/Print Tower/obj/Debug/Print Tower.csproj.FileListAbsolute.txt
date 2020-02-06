@@ -1,4 +1,3 @@
-D:\Projects\C#\Print Tower\Print Tower\obj\Debug\Print Tower.csprojAssemblyReference.cache
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\AddDevice.g.cs
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\MainWindow.g.cs
 D:\Projects\C#\Print Tower\Print Tower\obj\Debug\App.g.cs
