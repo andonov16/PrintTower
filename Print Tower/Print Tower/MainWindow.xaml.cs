@@ -149,9 +149,15 @@ namespace Print_Tower
         }
         private void Settings_Button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
                 dt.Stop();
                 SettingsWindow sw = new SettingsWindow();
                 sw.Show();
+            }
+            catch (Exception)
+            {
+            }
         }
         private void PrintersList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
