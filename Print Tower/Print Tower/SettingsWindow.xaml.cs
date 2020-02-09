@@ -24,7 +24,6 @@ namespace Print_Tower
         public SettingsWindow()
         {
             InitializeComponent();
-            MainWindow.dt.Stop();
 
             this.IP_Adress_Box.Text = DBConnect.server;
             this.DBname_Box.Text = DBConnect.database;
@@ -42,7 +41,6 @@ namespace Print_Tower
             MainWindow.dt.Start();
             this.Close();
         }
-
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
             int hours, minutes, seconds;
@@ -58,8 +56,9 @@ namespace Print_Tower
                             if (TableName_Box.Text != String.Empty)
                             {
                                 if (int.TryParse(HoursBox.Text, out hours) && int.TryParse(MinutesBox.Text, out minutes) && int.TryParse(SecondsBox.Text, out seconds) &&
-                                hours >= 0 && minutes >= 0 && seconds >= 0)
+                                hours >= 0 && minutes >= 0 && seconds >= 0 && new TimeSpan(0,0,0) < new TimeSpan(hours, minutes, seconds))
                                 {
+                                    MainWindow.dt.Stop();
                                     DBConnect.CloseConnection();
                                     DBConnect.SaveChanges(IP_Adress_Box.Text, DBname_Box.Text, Username_Box.Text, Password_Box.Text,
                                                           TableName_Box.Text, hours, minutes, seconds);

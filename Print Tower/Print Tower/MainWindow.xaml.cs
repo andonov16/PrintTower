@@ -72,28 +72,49 @@ namespace Print_Tower
         //----------------------------MainWindow Events---------------------------------------------------
         private void DeleteDevice_Button_Click(object sender, RoutedEventArgs e)
         {
-            Device.Delete((Device)PrintersList.SelectedItem);
-            Device.SaveData();
+            try
+            {
+                Device.Delete((Device)PrintersList.SelectedItem);
+                Device.SaveData();
+            }
+            catch (Exception)
+            {
+                //ignore the problem
+            }
         }
         private void AddDevice_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddDevice dv = new AddDevice();
-            dv.Show();
+            try
+            {
+                AddDevice dv = new AddDevice();
+                dv.Show();
+            }
+            catch (Exception)
+            {
+               // MessageBox.Show("Process failed! Please try again!");
+            }
         }
         private void DevPropsGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            Device exploredDev = (Device)PrintersList.SelectedItem;
-            if (exploredDev != null)
+            try
             {
-                if (ExplorePanel.Visibility == Visibility.Hidden)
-                    ExplorePanel.Visibility = Visibility.Visible;
-                DeviceName_Block.Text = exploredDev.DeviceName;
-                DeviceIP_Block.Text = exploredDev.IP;
-                DevPropsGrid.ItemsSource = exploredDev.DeviceProps;
+                Device exploredDev = (Device)PrintersList.SelectedItem;
+                if (exploredDev != null)
+                {
+                    if (ExplorePanel.Visibility == Visibility.Hidden)
+                        ExplorePanel.Visibility = Visibility.Visible;
+                    DeviceName_Block.Text = exploredDev.DeviceName;
+                    DeviceIP_Block.Text = exploredDev.IP;
+                    DevPropsGrid.ItemsSource = exploredDev.DeviceProps;
+                }
+                else
+                {
+                    ExplorePanel.Visibility = Visibility.Hidden;
+                }
             }
-            else
+            catch (Exception)
             {
-                ExplorePanel.Visibility = Visibility.Hidden;
+               //MessageBox.Show("Process failed! Please try again!");
             }
         }
         private void AddProp_Click(object sender, RoutedEventArgs e)
@@ -107,22 +128,34 @@ namespace Print_Tower
             catch (Exception)
             {
                 //ingnore the click
+                //MessageBox.Show("Process failed! Please try again!");
             }
         }
         private void DeleteProp_Click(object sender, RoutedEventArgs e)
         {
-            DeviceProp deletedProp = (DeviceProp)DevPropsGrid.SelectedItem;
-            if(deletedProp != null)
+            try
             {
-                Device dev = (Device)PrintersList.SelectedItem;
-                dev.DeviceProps.Remove(deletedProp);
+                DeviceProp deletedProp = (DeviceProp)DevPropsGrid.SelectedItem;
+                if (deletedProp != null)
+                {
+                    Device dev = (Device)PrintersList.SelectedItem;
+                    dev.DeviceProps.Remove(deletedProp);
+                }
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show("Process failed! Please try again!");
             }
         }
         private void Settings_Button_Click(object sender, RoutedEventArgs e)
         {
-            dt.Stop();
-            SettingsWindow sw = new SettingsWindow();
-            sw.Show();
+                dt.Stop();
+                SettingsWindow sw = new SettingsWindow();
+                sw.Show();
+        }
+        private void PrintersList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //Ignore
         }
     }
 }

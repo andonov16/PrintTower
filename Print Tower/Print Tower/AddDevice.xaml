@@ -16,7 +16,8 @@
             <TextBox Name="IP_Block" Height="30" Background="LightGray"></TextBox>
 
             <TextBlock Text="Полета на устройството" FontSize="18" Padding="5"/>
-            <DataGrid Name="DevicePropsGrid" AutoGenerateColumns="False" Height="160" CanUserDeleteRows="False">
+            <DataGrid Name="DevicePropsGrid" AutoGenerateColumns="False" Height="160" IsReadOnly="True"
+                      CanUserDeleteRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Име" Width="*" Binding="{Binding Path= PropName}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Стойност" Width="*" Binding="{Binding Path= PropOID}"></DataGridTextColumn>

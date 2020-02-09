@@ -40,66 +40,87 @@ namespace Print_Tower
         }
         private void Add_Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.dt.Stop();
-            IPAddress ia;
-            if (DeviceName_Block.Text.Length != 0)
+            try
             {
-                if (Device.Devices != null && Device.Devices.Count > 0)
+                MainWindow.dt.Stop();
+                IPAddress ia;
+                if (DeviceName_Block.Text.Length != 0)
                 {
-                    if (!Device.Devices.Any(dev => dev.DeviceName == DeviceName_Block.Text))
+                    if (Device.Devices != null && Device.Devices.Count > 0)
+                    {
+                        if (!Device.Devices.Any(dev => dev.DeviceName == DeviceName_Block.Text))
+                        {
+                            if (IPAddress.TryParse(IP_Block.Text, out ia))
+                            {
+
+                                Device newDev = null;
+                                try
+                                {
+                                    newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
+                                    newDev.AddDeviceProperties(newDeviceProps);
+                                    newDev.CheckOIDs();
+                                    Device.SaveData();
+                                }
+                                catch (NetworkInformationException)
+                                {
+                                    Device.Devices.Remove(newDev);
+                                    MessageBox.Show("Invalid IP Adress");
+                                }
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid IP Adress");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Name");
+                        }
+                    }
+                    else
                     {
                         if (IPAddress.TryParse(IP_Block.Text, out ia))
                         {
-
-                            Device newDev = null;
-                            try
-                            {
-                                newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
-                                newDev.AddDeviceProperties(newDeviceProps);
-                                newDev.CheckOIDs();
-                                Device.SaveData();
-                                this.Close();
-                            }
-                            catch (NetworkInformationException)
-                            {
-                                Device.Devices.Remove(newDev);
-                                MessageBox.Show("Invalid IP Adress");
-                            }
-
+                            Device newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
+                            newDev.AddDeviceProperties(newDeviceProps);
+                            Device.SaveData();
                         }
                         else
                         {
                             MessageBox.Show("Invalid IP Adress");
                         }
-                    }else
-                    {
-                        MessageBox.Show("Invalid Name");
-                    }
-                } else
-                {
-                    if (IPAddress.TryParse(IP_Block.Text, out ia))
-                    {
-                        Device newDev = new Device(DeviceName_Block.Text, IP_Block.Text);
-                        newDev.AddDeviceProperties(newDeviceProps);
-                        Device.SaveData();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid IP Adress");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Invalid Name");
+                }
+                MainWindow.dt.Start();
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Invalid Name");
+                MainWindow.dt.Start();
             }
-            MainWindow.dt.Start();
+
+
         }
         private void AddProperty_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddDeviceProperty newW = new AddDeviceProperty(newDeviceProps);
-            newW.Show();
+            try
+            {
+                AddDeviceProperty newW = new AddDeviceProperty(newDeviceProps);
+                newW.Show();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void DevicePropsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //Ignore
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Print_Tower
             DeviceProps = new ObservableCollection<DeviceProp>();
             IsOnline();
             if (Device.Devices == null)
-                Device.Devices = new ObservableCollection<Device>();         
+                Device.Devices = new ObservableCollection<Device>(); 
             Devices.Add(this);
         }
 

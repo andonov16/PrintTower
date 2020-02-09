@@ -24,8 +24,14 @@ namespace Print_Tower
 
         public AddDeviceProperty(ObservableCollection<DeviceProp> list)
         {
-            InitializeComponent();
-            devsToAdd = list;
+            try
+            {
+                InitializeComponent();
+                devsToAdd = list;
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,8 +41,14 @@ namespace Print_Tower
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            devsToAdd.Add(new DeviceProp(PropName.Text, PropIOD.Text));
-            this.Close();
+            try
+            {
+                devsToAdd.Add(new DeviceProp(PropName.Text, PropIOD.Text));
+                this.Close();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }
